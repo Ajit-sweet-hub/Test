@@ -53,7 +53,11 @@
             min-width: 200px; 
             margin: 10px;
             border-radius: 8px;
-            box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Light shadow effect */
+            transition: box-shadow 0.3s; /* Smooth transition for shadow */
+        }
+        .gallery img:hover {
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); /* Slightly darker shadow on hover */
         }
         .surprise-button {
             margin-top: 20px;
