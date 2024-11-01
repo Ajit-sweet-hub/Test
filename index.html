@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday khushi</title>
+    <title>Happy Birthday [Her Name]</title>
+
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap"> <!-- Lato for minimal style -->
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -24,66 +32,109 @@
             font-size: 2rem;
             color: #ff6347;
             margin-top: 10px;
+            font-family: 'Roboto', sans-serif; /* Keeping the countdown font */
         }
-        .message, .gallery {
+        .message {
             width: 80%;
             max-width: 600px;
             text-align: center;
             margin-top: 20px;
+            font-family: 'Lato', sans-serif; /* Applying Lato font for minimal style */
+            font-size: 1.2em; /* Adjusting font size for better readability */
+            line-height: 1.5; /* Adding line height for better spacing */
+        }
+        .gallery {
+            display: flex; /* Use flexbox for horizontal layout */
+            overflow-x: auto; /* Enable horizontal scrolling */
+            width: 80%;
+            max-width: 600px;
+            margin-top: 20px;
+            scroll-behavior: smooth; /* Smooth scrolling */
         }
         .gallery img {
-            width: 100%;
-            margin: 10px 0;
+            min-width: 200px; /* Minimum width for each image */
+            margin: 10px;
             border-radius: 8px;
             box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+        }
+        .surprise-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.5em;
+            color: white;
+            background-color: #ff69b4; /* Same color as the header for consistency */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Lato', sans-serif; /* Using the same font for a cohesive look */
+            transition: background-color 0.3s; /* Smooth transition for hover effect */
+        }
+        .surprise-button:hover {
+            background-color: #ff4f8b; /* Darker shade on hover */
         }
     </style>
 </head>
 <body>
 
-    <!-- Background Music -->
-    <audio autoplay loop>
-        <source src="music/Testk.mp3" type="audio/mp3">
-        Your browser does not support the audio element.
-    </audio>
+    <h1>Happy Birthday, [Her Name]!</h1>
 
-    <h1>Happy Birthday, Khushi!</h1>
+    <!-- Countdown Display -->
+    <div id="countdown">Countdown to Birthday: Loading...</div>
 
-    <div id="countdown"></div>
-
+    <!-- Birthday Message -->
     <div class="message">
         <p>To the most amazing person in my life, happy birthday! Here's to all the memories we’ve created together, and all the wonderful times to come. I hope this day is as special as you are. Love you always!</p>
     </div>
 
+    <!-- Horizontal Scrolling Gallery Section -->
     <div class="gallery">
-        <h2>Memories Together</h2>
         <img src="img/photo1.jpg" alt="Memory 1">
         <img src="img/photo2.jpg" alt="Memory 2">
         <img src="img/photo3.jpg" alt="Memory 3">
+        <img src="img/photo4.jpg" alt="Memory 4">
+        <img src="img/photo5.jpg" alt="Memory 5">
     </div>
 
+    <!-- Surprise Button at the End of the Page -->
+    <button class="surprise-button" onclick="alert('Surprise! Hope you have an amazing birthday!')">
+        Tap Here!
+    </button>
+
+    <!-- Background Music -->
+    <audio id="background-music" loop>
+        <source src="music/Testk.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
     <script>
-        // Countdown Timer
-        const birthdayDate = new Date('2024-11-26T00:00:00').getTime();  // Replace with her birthday
-        const countdownEl = document.getElementById('countdown');
+        // Birthday Date (replace with her birthday)
+        const birthdayDate = new Date('2024-11-26T00:00:00Z').getTime();
 
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = birthdayDate - now;
+        // Countdown Function
+        async function updateCountdown() {
+            try {
+                const response = await fetch('http://worldtimeapi.org/api/timezone/Etc/UTC');
+                const data = await response.json();
+                const now = new Date(data.datetime).getTime();
+                const distance = birthdayDate - now;
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            countdownEl.innerHTML = `Countdown to Birthday: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+                document.getElementById('countdown').innerHTML = `Countdown to Birthday: ${days}d ${hours}h ${minutes}m ${seconds}s`;
 
-            if (distance < 0) {
-                clearInterval(countdownInterval);
-                countdownEl.innerHTML = "Happy Birthday!";
+                if (distance < 0) {
+                    clearInterval(countdownInterval);
+                    document.getElementById('countdown').innerHTML = "Happy Birthday!";
+                }
+            } catch (error) {
+                console.error("Error fetching time from API:", error);
             }
         }
 
+        // Start countdown
         const countdownInterval = setInterval(updateCountdown, 1000);
     </script>
 </body>
