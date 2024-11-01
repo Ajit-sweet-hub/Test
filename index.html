@@ -29,7 +29,7 @@
         }
         #countdown {
             font-size: 2rem;
-            color: #ff69b4;
+            color: #ff69b4; /* Changed countdown color to pink */
             margin-top: 10px;
             font-family: 'Roboto', sans-serif;
         }
@@ -47,7 +47,8 @@
             width: 80%;
             max-width: 600px;
             margin-top: 20px;
-            scroll-behavior: smooth; 
+            position: relative; /* Set position to relative for stacking context */
+            z-index: 1; /* Bring the gallery above the dots */
         }
         .gallery img {
             min-width: 200px; 
@@ -90,6 +91,7 @@
             background: #ff69b4; /* Pink color */
             opacity: 0.6;
             animation: float 4s infinite;
+            z-index: 0; /* Ensure dots are behind other elements */
         }
 
         /* Keyframes for floating animation */
