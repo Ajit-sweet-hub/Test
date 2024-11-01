@@ -3,14 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday khushi ❤️</title>
+    <title>Happy Birthday Khushi ❤️</title>
 
     <!-- Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap"> <!-- Lato for minimal style -->
-
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap"> 
 
     <style>
         body {
@@ -21,38 +18,39 @@
             justify-content: center;
             margin: 0;
             padding: 0;
-            background-color: #f9f3f3;
-            color: #333;
+            overflow: hidden;
+            background-color: #f9f3f3; 
+            position: relative; 
         }
+
         h1 {
             font-size: 3rem;
             color: #ff69b4;
         }
         #countdown {
             font-size: 2rem;
-            color: #ff6347;
+            color: #ff69b4;
             margin-top: 10px;
-            font-family: 'Roboto', sans-serif; /* Keeping the countdown font */
+            font-family: 'Roboto', sans-serif;
         }
         .message {
-            width: 80%;
-            max-width: 600px;
             text-align: center;
             margin-top: 20px;
-            font-family: 'Lato', sans-serif; /* Applying Lato font for minimal style */
-            font-size: 1.2em; /* Adjusting font size for better readability */
-            line-height: 1.5; /* Adding line height for better spacing */
+            font-family: 'Lato', sans-serif;
+            font-size: 1.2em;
+            color: #ff69b4; /* Change text color to pink */
+            font-weight: 600; /* Make the font slightly bold */
         }
         .gallery {
-            display: flex; /* Use flexbox for horizontal layout */
-            overflow-x: auto; /* Enable horizontal scrolling */
+            display: flex; 
+            overflow-x: auto; 
             width: 80%;
             max-width: 600px;
             margin-top: 20px;
-            scroll-behavior: smooth; /* Smooth scrolling */
+            scroll-behavior: smooth; 
         }
         .gallery img {
-            min-width: 200px; /* Minimum width for each image */
+            min-width: 200px; 
             margin: 10px;
             border-radius: 8px;
             box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
@@ -61,85 +59,104 @@
             margin-top: 20px;
             padding: 10px 20px;
             font-size: 1.5em;
-            color: white;
-            background-color: #ff69b4; /* Same color as the header for consistency */
+            color: #ff69b4;
+            background: rgba(255, 255, 255, 0.9);
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
-            font-family: 'Lato', sans-serif; /* Using the same font for a cohesive look */
-            transition: background-color 0.3s; /* Smooth transition for hover effect */
+            transition: background-color 0.3s, box-shadow 0.3s; 
+            animation: flicker 1s infinite alternate; 
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
         }
         .surprise-button:hover {
-            background-color: #ff4f8b; /* Darker shade on hover */
+            background-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+        }
+
+        @keyframes flicker {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        /* Dot Animation Styles */
+        .dot {
+            position: absolute;
+            border-radius: 50%;
+            background: #ff69b4; /* Pink color */
+            opacity: 0.6;
+            animation: float 4s infinite;
+        }
+
+        /* Keyframes for floating animation */
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-    <h1>Happy Birthday, khushi!!</h1>
-
-    <!-- Countdown Display -->
+    <h1>Happy Birthday, Khushi!!</h1>
     <div id="countdown">Countdown to Birthday: Loading...</div>
 
-    <!-- Birthday Message -->
     <div class="message">
-        <p>To the most amazing person in my life, happy birthday! Here's to all the memories we’ve created together, and all the wonderful times to come. I hope this day is as special as you are. i Love you forever my wife !</p>
+        <p>To the most amazing person in my life, happy birthday! Here's to all the memories we’ve created together, and all the wonderful times to come. I hope this day is as special as you are. I love you forever, my wife!</p>
     </div>
 
     <!-- Horizontal Scrolling Gallery Section -->
     <div class="gallery">
-        <img src="Img/1.jpg" >
-        <img src="Img/2.jpg" >
-        <img src="Img/3.jpg" >
-        <img src="Img/4.jpg" >
-        <img src="Img/5.jpg" >
+        <img src="Img/1.jpg" alt="Memory 1">
+        <img src="Img/2.jpg" alt="Memory 2">
+        <img src="Img/3.jpg" alt="Memory 3">
+        <img src="Img/4.jpg" alt="Memory 4">
+        <img src="Img/5.jpg" alt="Memory 5">
     </div>
 
-    <!-- Surprise Button at the End of the Page -->
     <button class="surprise-button" id="surpriseButton">
-        Surprise Here!
+        Tap Here!
     </button>
 
-    <!-- Background Music -->
-    <audio id="background-music" loop>
-        <source src="music/Testk.mp3" type="audio/mp3">
-        Your browser does not support the audio element.
-    </audio>
-
     <script>
-        // Birthday Date (replace with her birthday)
+        // Set the birthday date correctly
         const birthdayDate = new Date('2024-11-26T00:00:00Z').getTime();
 
-        // Countdown Function
+        // Function to update the countdown
         function updateCountdown() {
-            const now = new Date().getTime(); // Get the current local time
+            const now = new Date().getTime();
             const distance = birthdayDate - now;
+
+            if (distance < 0) {
+                document.getElementById('countdown').innerHTML = "Happy Birthday!";
+                return; 
+            }
 
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            document.getElementById('countdown').innerHTML = `Countdown to Birthday: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+            document.getElementById('countdown').innerHTML = 
+                `Countdown to Birthday: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
 
-            if (distance < 0) {
-                clearInterval(countdownInterval);
-                document.getElementById('countdown').innerHTML = "Happy Birthday!";
+        const countdownInterval = setInterval(updateCountdown, 1000);
+
+        // Function to create animated dots
+        function createDots() {
+            for (let i = 0; i < 20; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                dot.style.width = dot.style.height = Math.random() * 20 + 5 + 'px'; // Random size
+                dot.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
+                dot.style.top = Math.random() * 100 + 'vh'; // Random vertical position
+                dot.style.animationDuration = Math.random() * 2 + 3 + 's'; // Random animation duration
+                document.body.appendChild(dot);
             }
         }
 
-        // Play music when the surprise button is clicked
-        document.getElementById('surpriseButton').addEventListener('click', function() {
-            const music = document.getElementById('background-music');
-            if (music.paused) {
-                music.play(); // Play the music if it is paused
-            } else {
-                music.pause(); // Pause the music if it is already playing
-            }
-        });
-
-        // Start countdown
-        const countdownInterval = setInterval(updateCountdown, 1000);
+        createDots(); // Call the function to create dots
     </script>
 </body>
 </html>
