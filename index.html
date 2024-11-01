@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Khushi!</title>
+    <title>Happy Birthday [Her Name]</title>
 
     <!-- Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap">
@@ -76,7 +76,7 @@
 </head>
 <body>
 
-    <h1>Happy Birthday, Khushi!</h1>
+    <h1>Happy Birthday, khushi!!</h1>
 
     <!-- Countdown Display -->
     <div id="countdown">Countdown to Birthday: Loading...</div>
@@ -88,11 +88,11 @@
 
     <!-- Horizontal Scrolling Gallery Section -->
     <div class="gallery">
-        <img src="img/1.jpg" alt="Memory 1">
-        <img src="img/2.jpg" alt="Memory 2">
-        <img src="img/3.jpg" alt="Memory 3">
-        <img src="img/4.jpg" alt="Memory 4">
-        <img src="img/5.jpg" alt="Memory 5">
+        <img src="img/1.jpg" >
+        <img src="img/2.jpg" >
+        <img src="img/3.jpg" >
+        <img src="img/4.jpg" >
+        <img src="img/5.jpg" >
     </div>
 
     <!-- Surprise Button at the End of the Page -->
@@ -111,27 +111,20 @@
         const birthdayDate = new Date('2024-11-26T00:00:00Z').getTime();
 
         // Countdown Function
-        async function updateCountdown() {
-            try {
-                const response = await fetch('https://worldtimeapi.org/api/timezone/Etc/UTC'); // Ensure you're using https
-                const data = await response.json();
-                const now = new Date(data.datetime).getTime();
-                const distance = birthdayDate - now;
+        function updateCountdown() {
+            const now = new Date().getTime(); // Get the current local time
+            const distance = birthdayDate - now;
 
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                document.getElementById('countdown').innerHTML = `Countdown to Birthday: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+            document.getElementById('countdown').innerHTML = `Countdown to Birthday: ${days}d ${hours}h ${minutes}m ${seconds}s`;
 
-                if (distance < 0) {
-                    clearInterval(countdownInterval);
-                    document.getElementById('countdown').innerHTML = "Happy Birthday!";
-                }
-            } catch (error) {
-                console.error("Error fetching time from API:", error);
-                document.getElementById('countdown').innerHTML = "Error fetching countdown. Please try again.";
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById('countdown').innerHTML = "Happy Birthday!";
             }
         }
 
