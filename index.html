@@ -118,6 +118,12 @@
         Tap Here!
     </button>
 
+    <!-- Background Music -->
+    <audio id="background-music" loop>
+        <source src="music/Testk.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
     <script>
         // Set the birthday date correctly
         const birthdayDate = new Date('2024-11-26T00:00:00Z').getTime();
@@ -157,6 +163,16 @@
         }
 
         createDots(); // Call the function to create dots
+
+        // Play music when the surprise button is clicked
+        document.getElementById('surpriseButton').addEventListener('click', function() {
+            const music = document.getElementById('background-music');
+            if (music.paused) {
+                music.play(); // Play the music if it is paused
+            } else {
+                music.pause(); // Pause the music if it is already playing
+            }
+        });
     </script>
 </body>
 </html>
