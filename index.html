@@ -88,16 +88,16 @@
 
     <!-- Horizontal Scrolling Gallery Section -->
     <div class="gallery">
-        <img src="img/photo1.jpg" alt="Memory 1">
-        <img src="img/photo2.jpg" alt="Memory 2">
-        <img src="img/photo3.jpg" alt="Memory 3">
-        <img src="img/photo4.jpg" alt="Memory 4">
-        <img src="img/photo5.jpg" alt="Memory 5">
+        <img src="photo1.jpg" alt="Memory 1">
+        <img src="photo2.jpg" alt="Memory 2">
+        <img src="photo3.jpg" alt="Memory 3">
+        <img src="photo4.jpg" alt="Memory 4">
+        <img src="photo5.jpg" alt="Memory 5">
     </div>
 
     <!-- Surprise Button at the End of the Page -->
-    <button class="surprise-button" onclick="alert('Surprise! Hope you have an amazing birthday!')">
-        Tap Here!
+    <button class="surprise-button" id="surpriseButton">
+        Surprise Here!
     </button>
 
     <!-- Background Music -->
@@ -113,7 +113,7 @@
         // Countdown Function
         async function updateCountdown() {
             try {
-                const response = await fetch('http://worldtimeapi.org/api/timezone/Etc/UTC');
+                const response = await fetch('https://worldtimeapi.org/api/timezone/Etc/UTC'); // Ensure you're using https
                 const data = await response.json();
                 const now = new Date(data.datetime).getTime();
                 const distance = birthdayDate - now;
@@ -131,8 +131,19 @@
                 }
             } catch (error) {
                 console.error("Error fetching time from API:", error);
+                document.getElementById('countdown').innerHTML = "Error fetching countdown. Please try again.";
             }
         }
+
+        // Play music when the surprise button is clicked
+        document.getElementById('surpriseButton').addEventListener('click', function() {
+            const music = document.getElementById('background-music');
+            if (music.paused) {
+                music.play(); // Play the music if it is paused
+            } else {
+                music.pause(); // Pause the music if it is already playing
+            }
+        });
 
         // Start countdown
         const countdownInterval = setInterval(updateCountdown, 1000);
