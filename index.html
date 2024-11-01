@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Gulu gulu</title>
+    <title>Happy Birthday khushi</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -41,7 +41,13 @@
 </head>
 <body>
 
-    <h1>Happy Birthday, GUlu!</h1>
+    <!-- Background Music -->
+    <audio autoplay loop>
+        <source src="music/test.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <h1>Happy Birthday, Khushi!</h1>
 
     <div id="countdown"></div>
 
@@ -51,14 +57,14 @@
 
     <div class="gallery">
         <h2>Memories Together</h2>
-        <img src="photo1.jpg" alt="Memory 1">
-        <img src="photo2.jpg" alt="Memory 2">
-        <img src="photo3.jpg" alt="Memory 3">
+        <img src="img/photo1.jpg" alt="Memory 1">
+        <img src="img/photo2.jpg" alt="Memory 2">
+        <img src="img/photo3.jpg" alt="Memory 3">
     </div>
 
     <script>
         // Countdown Timer
-        const birthdayDate = new Date('YYYY-MM-DDT00:00:00').getTime();  // Replace with her birthday
+        const birthdayDate = new Date('2005-12-26T00:00:00').getTime();  // Replace with her birthday
         const countdownEl = document.getElementById('countdown');
 
         function updateCountdown() {
